@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Selective Silence</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "nipplejs": "https://esm.sh/nipplejs@0.9.0"
+    }
+  }
+  </script>
+  <script src="app.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="device">
+    <header class="topbar">
+      <div class="title">
+        <div class="logo" aria-hidden="true">
+          <!-- simple earbud icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12a3 3 0 1 1-6 0 6 6 0 0 1 6-6z"></path>
+            <path d="M15 12a3 3 0 1 0 6 0 6 6 0 0 0-6-6z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="app-title">Selective Silence Pro</div>
+          <div class="subtitle">Light Blue</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <aside class="left-col">
+        <div class="case-wrap">
+          <img id="caseImage" src="/b791154a-fb8d-4fa6-8911-1d96beac10d1.png" alt="Earbuds in charging case" />
+          <div class="battery-below">
+            <div class="battery" role="img" aria-label="Battery level" title="Click to simulate drain">
+              <div class="battery-body">
+                <div class="battery-level" id="batteryLevel" style="width:89%"></div>
+                <div class="battery-text" id="battery">89%</div>
+              </div>
+            </div>
+          </div>
+          <!-- Estimated time remaining -->
+          <div class="time-remaining" id="timeRemaining">Estimated: 8h 23m</div>
+        </div>
+      </aside>
+
+      <section class="right-col">
+        <section class="modes">
+          <div class="modes-title">Modes</div>
+          <div class="mode-list" role="list" id="modeList">
+            <!-- modes rendered by JS -->
+          </div>
+        </section>
+
+        <section class="controls">
+          <div class="row">
+            <div class="control-card">
+              <div class="control-label">ANC</div>
+              <div class="control-value">
+                <label class="switch">
+                  <input id="ancToggle" type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="control-card">
+              <div class="control-label">Transparency</div>
+              <div class="control-value">
+                <input id="transparency" type="range" min="0" max="100" value="20">
+              </div>
+            </div>
+          </div>
+
+          <div class="play-row">
+            <button id="prevBtn" class="icon-btn" title="Previous">
+              <svg viewBox="0 0 24 24"><path d="M6 18V6l8.5 6L6 18zM16 6h2v12h-2z" fill="currentColor"/></svg>
+            </button>
+            <button id="playBtn" class="play-btn" aria-pressed="false">
+              <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+            </button>
+            <button id="nextBtn" class="icon-btn" title="Next">
+              <svg viewBox="0 0 24 24"><path d="M18 6v12l-8.5-6L18 6zM6 6h2v12H6z" fill="currentColor"/></svg>
+            </button>
+          </div>
+
+          <div class="volume-row">
+            <svg class="vol-icon" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/></svg>
+            <input id="volume" type="range" min="0" max="100" value="60">
+            <div id="volVal">60</div>
+          </div>
+        </section>
+
+        <section class="extra">
+          <div class="extra-row">
+            <div class="info">
+              <div class="info-title">Active Profile</div>
+              <div id="activeProfile" class="info-value">—</div>
+            </div>
+            <button id="findBtn" class="outline-btn">Find earbuds</button>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-title">Focus timer</div>
+            <div class="timer-row">
+              <button class="time-btn" data-min="25">25m</button>
+              <button class="time-btn" data-min="45">45m</button>
+              <button class="time-btn" data-min="60">60m</button>
+              <div class="timer-display" id="timerDisplay">—</div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="foot">
+          <div class="note">
+            <button id="noiseBtn" class="outline-btn">Custom Noise Cancelling</button>
+            <button id="pairTeacherBtn" class="pair-btn">Pair with teacher</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

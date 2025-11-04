@@ -1,0 +1,302 @@
+:root{
+  --bg:#ffffff;
+  --muted:#7a7a7a;
+  --accent:#111;
+  --card:#f6f6f6;
+  --radius:12px;
+  font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg);
+  color:var(--accent);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
+}
+
+/* Base device - fullscreen */
+#device{
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+}
+
+/* Top bar */
+.topbar{
+  padding:0.8vh 2vw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:1px solid #f0f0f0;
+  flex-shrink:0;
+}
+.title{display:flex;gap:0.5vw;align-items:center; justify-content:center;}
+.logo svg{width:1.8vw;height:1.8vw;min-width:18px;min-height:18px;}
+.app-title{font-weight:700; text-align:center; font-size:1.4vw; line-height:1; min-font-size:14px;}
+.subtitle{font-size:0.9vw;color:var(--muted); text-align:center;min-font-size:10px;}
+
+/* Content area - stack vertically, centered, no scroll */
+.content{
+  padding:1.5vh 3vw;
+  overflow:hidden;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:1.2vh;
+  align-items:center;
+  justify-content:flex-start;
+  max-width:1000px;
+  margin:0 auto;
+  width:100%;
+  box-sizing:border-box;
+  min-height:0;
+}
+
+/* left/right columns - now stacked */
+.left-col{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  order:0;
+  flex-shrink:0;
+}
+
+.right-col{
+  width:100%;
+  max-width:700px;
+  display:flex;
+  flex-direction:column;
+  order:1;
+  gap:1vh;
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+}
+
+/* Image */
+.case-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.8vh;
+}
+.case-wrap img{
+  width:15vw;
+  max-width:250px;
+  min-width:120px;
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  object-fit:cover;
+  background:#fff;
+}
+
+/* battery moved below image */
+.battery-below{text-align:center;color:var(--muted);font-weight:600;display:flex;justify-content:center;align-items:center}
+
+/* New battery icon styles */
+.battery{
+  display:flex;
+  align-items:center;
+  gap:0.4vw;
+  height:1.8vh;
+  cursor:pointer;
+}
+.battery-body{
+  position:relative;
+  width:5vw;
+  min-width:60px;
+  height:1.5vh;
+  min-height:14px;
+  border-radius:5px;
+  border:2px solid #111;
+  box-sizing:border-box;
+  overflow:hidden;
+  background:transparent;
+  padding-right:0;
+}
+.battery-level{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:0%;
+  background:linear-gradient(90deg,#37d67a,#13a24b);
+  transition:width .4s ease;
+}
+.battery-text{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#fff;
+  font-size:0.9vw;
+  min-font-size:10px;
+  text-shadow:0 1px 0 rgba(0,0,0,0.3);
+  pointer-events:none;
+}
+
+/* when low battery, change color */
+.battery.low .battery-level{background:linear-gradient(90deg,#ffb951,#ff6b6b)}
+
+/* Estimated time remaining below the battery */
+.time-remaining{
+  margin-top:0.4vh;
+  color:var(--muted);
+  font-size:1vw;
+  min-font-size:11px;
+  font-weight:600;
+  text-align:center;
+}
+
+/* Modes */
+.modes{margin-top:0;flex-shrink:0;}
+.modes-title{font-size:1vw;min-font-size:11px;color:var(--muted);margin-bottom:0.6vh;font-weight:600;}
+.mode-list{display:flex;gap:0.6vw;flex-wrap:wrap}
+.mode{
+  flex:1 1 calc(50% - 0.3vw);
+  min-width:120px;
+  padding:0.8vh 1vw;
+  border-radius:8px;
+  background:var(--card);
+  border:none;
+  font-weight:600;
+  color:#111;
+  text-align:left;
+  font-size:1.1vw;
+  min-font-size:12px;
+  cursor:pointer;
+}
+.mode.active{background:#111;color:#fff}
+.mode:focus{outline:2px solid rgba(0,0,0,0.08)}
+
+/* Controls */
+.controls{margin-top:0; flex:0 0 auto;flex-shrink:0;}
+.row{display:flex;gap:0.8vw;margin-bottom:0.8vh}
+.control-card{
+  background:#fff;
+  border-radius:8px;
+  padding:0.8vh 1vw;
+  box-shadow:0 2px 6px rgba(0,0,0,0.03);
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.control-label{font-size:1vw;min-font-size:11px;color:var(--muted);font-weight:600;}
+.control-value{display:flex;align-items:center;gap:0.8vw}
+
+/* Toggle */
+.switch{position:relative;display:inline-block;width:3.5vw;min-width:36px;height:2vh;min-height:20px;}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;inset:0;background:#e6e6e6;border-radius:999px;transition:all .18s}
+.slider:before{content:"";position:absolute;height:calc(100% - 4px);width:calc(100% - 4px);max-width:16px;max-height:16px;left:2px;top:2px;background:white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.08);transition:all .18s}
+.switch input:checked + .slider{background:#111}
+.switch input:checked + .slider:before{transform:translateX(calc(1.8vw));}
+
+/* Play controls */
+.play-row{display:flex;align-items:center;justify-content:center;gap:1vw;margin:0.8vh 0;flex-shrink:0;}
+.icon-btn{
+  width:3.5vw;height:3.5vw;min-width:36px;min-height:36px;max-width:48px;max-height:48px;border-radius:8px;border:none;background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.icon-btn svg{width:60%;height:60%;}
+.play-btn{
+  width:5vw;height:5vw;min-width:50px;min-height:50px;max-width:64px;max-height:64px;border-radius:14px;border:none;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(17,17,17,0.12);cursor:pointer;
+}
+.play-btn svg{width:60%;height:60%;}
+
+/* Volume */
+.volume-row{display:flex;align-items:center;gap:0.8vw;padding:0.6vh 0;flex-shrink:0;}
+.vol-icon{width:1.5vw;height:1.5vw;min-width:16px;min-height:16px;color:var(--muted)}
+.volume-row input[type=range]{flex:1;height:0.4vh;min-height:4px;}
+#volVal{width:2.5vw;min-width:32px;text-align:right;color:var(--muted);font-weight:600;font-size:1.1vw;min-font-size:12px;}
+
+/* Extra */
+.extra{margin-top:auto;width:100%;flex-shrink:0;}
+.extra-row{display:flex;align-items:center;justify-content:space-between;gap:0.8vw;margin-bottom:0.8vh;flex-wrap:wrap;}
+.info{flex:1;min-width:150px;}
+.info-title{font-size:0.9vw;min-font-size:10px;color:var(--muted);font-weight:600;}
+.info-value{font-weight:600;font-size:1.1vw;min-font-size:12px;margin-top:0.3vh;}
+.outline-btn{padding:0.8vh 1.2vw;border-radius:8px;border:1px solid #e6e6e6;background:#fff;box-sizing:border-box;text-align:center;font-size:1.1vw;min-font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+
+/* Timeline / timer */
+.timeline{margin-top:0.8vh;width:100%;flex-shrink:0;}
+.timeline-title{font-size:1vw;min-font-size:11px;color:var(--muted);margin-bottom:0.6vh;font-weight:600;}
+.timer-row{display:flex;align-items:center;gap:0.6vw;flex-wrap:wrap;}
+.time-btn{
+  padding:0.8vh 1.2vw;
+  border-radius:8px;
+  border:none;
+  background:var(--card);
+  font-weight:600;
+  font-size:1.1vw;
+  min-font-size:12px;
+  cursor:pointer;
+}
+.timer-display{
+  margin-left:auto;
+  padding:0.8vh 1.2vw;
+  background:#111;
+  color:#fff;
+  border-radius:8px;
+  font-weight:600;
+  font-size:1.1vw;
+  min-font-size:12px;
+  min-width:50px;
+  text-align:center;
+}
+
+/* Footer */
+.foot{
+  padding:0.8vh 0 0 0;
+  border-top:1px solid #f0f0f0;
+  font-size:1.1vw;
+  min-font-size:12px;
+  color:var(--muted);
+  flex-shrink:0;
+  width:100%;
+}
+.foot .note{
+  display:flex;
+  flex-direction:column;
+  gap:0.6vh;
+  align-items:stretch;
+}
+
+.pair-btn{
+  padding:0.8vh 1.2vw;
+  border-radius:8px;
+  border:1px solid #e6e6e6;
+  background:#fff;
+  font-weight:600;
+  color:var(--accent);
+  width:100%;
+  box-shadow:0 2px 8px rgba(0,0,0,0.03);
+  font-size:1.1vw;
+  min-font-size:12px;
+  cursor:pointer;
+}
+
+/* Mobile adjustments */
+@media (max-width:719px) {
+  .app-title{font-size:3.5vw;}
+  .subtitle{font-size:2.2vw;}
+  .case-wrap img{width:35vw;}
+  .mode{font-size:2.8vw;}
+  .control-label{font-size:2.5vw;}
+  .time-btn{font-size:2.8vw;}
+  .info-title{font-size:2.2vw;}
+  .info-value{font-size:2.8vw;}
+}
